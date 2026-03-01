@@ -6,6 +6,7 @@ import Link from "next/link";
 import "./Header.css";
 import Image from "next/image";
 import logo from "../../images/PUSTAK-MAZA-LOGO.png";
+import { About } from '@/routes/WebsiteRoute';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ const Header = () => {
       <div className="navbar">
 
         {/* TOP BAR */}
-        <div className="top-container">
+        {/* <div className="top-container">
           <div className="contactnumber">+91 9876543210</div>
           <div className="social-media">
             <Link href="#"><FaInstagram /></Link>
@@ -23,7 +24,7 @@ const Header = () => {
             <Link href="#"><FaTwitter /></Link>
             <Link href="#"><FaLinkedin /></Link>
           </div>
-        </div>
+        </div> */}
 
         <hr />
 
@@ -56,11 +57,10 @@ const Header = () => {
         <div className={`page-list ${menuOpen ? "active" : ""}`}>
           <ul>
             <li><Link href="/">HOME</Link></li>
-            <li><Link href="#">ABOUT US</Link></li>
+            <li><Link href={About}>ABOUT US</Link></li>
             <li><Link href="/booklist">BOOKS</Link></li>
-            <li><Link href="#">NEW RELEASE</Link></li>
-            <li><Link href="#">CONTACT US</Link></li>
-            <li><Link href="#">BLOG</Link></li>
+            <li><Link href="/new-release">NEW RELEASE</Link></li>
+            <li><Link href="/contact-us">CONTACT US</Link></li>
           </ul>
         </div>
 

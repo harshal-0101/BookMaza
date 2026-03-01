@@ -1,83 +1,107 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function WishlistPage() {
+export default function BookStorePage() {
   const router = useRouter()
-  const [wishlist, setWishlist] = useState([
-    {
-      id: 1,
-      title: "The Midnight Library",
-      author: "Matt Haig",
-      description: "A library between life and death with infinite possibilities",
-      genre: "Fiction",
-      cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-      price: 550,
-      rating: 4.8,
-      reviewCount: 15234,
-      publishDate: "Nov 2024",
-      pageCount: 304,
-      readingTime: "6 hours"
-    },
-    {
-      id: 2,
-      title: "Project Hail Mary",
-      author: "Andy Weir",
-      description: "A lone astronaut's mission to save humanity",
-      genre: "Sci-Fi",
-      cover: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop",
-      price: 650,
-      rating: 4.9,
-      reviewCount: 22456,
-      publishDate: "Oct 2024",
-      pageCount: 476,
-      readingTime: "9 hours"
-    },
-    {
-      id: 3,
-      title: "The Seven Husbands of Evelyn Hugo",
-      author: "Taylor Jenkins Reid",
-      description: "A reclusive Hollywood icon's life story",
-      genre: "Historical Fiction",
-      cover: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&h=600&fit=crop",
-      price: 499,
-      rating: 4.7,
-      reviewCount: 18765,
-      publishDate: "Sep 2024",
-      pageCount: 388,
-      readingTime: "7.5 hours"
-    },
-     {
-      id: 4,
-      title: "Project Python",
-      author: "Andy Weir",
-      description: "A lone astronaut's mission to save humanity",
-      genre: "Sci-Fi",
-      cover: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop",
-      price: 650,
-      rating: 4.9,
-      reviewCount: 22456,
-      publishDate: "Oct 2024",
-      pageCount: 476,
-      readingTime: "9 hours"
-    }
-  ])
-
   const [cart, setCart] = useState([])
+  const [wishlist, setWishlist] = useState([])
   const [hoveredBook, setHoveredBook] = useState(null)
 
-  const removeFromWishlist = (bookId) => {
-    setWishlist(wishlist.filter(book => book.id !== bookId))
-  }
+  const readersFavorites = [
+    {
+      id: 9,
+      slug: 'the-48-laws-of-power',
+      title: 'The 48 Laws of Power',
+      author: 'Robert Greene',
+      description: 'Understand the laws that govern human behavior',
+      genre: 'Strategy',
+      cover: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=600&fit=crop',
+      price: 699,
+      rating: 4.6,
+      reviewCount: 14532,
+      whyLoveIt: 'Timeless strategies for success',
+      publishDate: 'Sep 2024',
+      pageCount: 452,
+      readingTime: '9 hours'
+    },
+    {
+      id: 10,
+      slug: 'educated',
+      title: 'Educated',
+      author: 'Tara Westover',
+      description: 'From survivalist family to Cambridge PhD',
+      genre: 'Memoir',
+      cover: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=400&h=600&fit=crop',
+      price: 549,
+      rating: 4.9,
+      reviewCount: 18234,
+      whyLoveIt: 'Powerful story of resilience',
+      publishDate: 'Published this month',
+      pageCount: 334,
+      readingTime: '7 hours'
+    },
+    {
+      id: 11,
+      slug: 'meditations',
+      title: 'Meditations',
+      author: 'Marcus Aurelius',
+      description: 'Ancient Stoic philosophy for modern life',
+      genre: 'Philosophy',
+      cover: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&h=600&fit=crop',
+      price: 349,
+      rating: 4.8,
+      reviewCount: 9876,
+      whyLoveIt: 'Eternal wisdom that never ages',
+      publishDate: 'Oct 2024',
+      pageCount: 304,
+      readingTime: '6 hours'
+    },
+    {
+      id: 12,
+      slug: 'the-power-of-now',
+      title: 'The Power of Now',
+      author: 'Eckhart Tolle',
+      description: 'Find peace in the present moment',
+      genre: 'Spirituality',
+      cover: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=300&fit=crop',
+      price: 479,
+      rating: 4.7,
+      reviewCount: 12456,
+      whyLoveIt: 'Life-changing perspective shift',
+      publishDate: 'Nov 2024',
+      pageCount: 236,
+      readingTime: '5 hours'
+    }
+  ]
 
   const addToCart = (bookId) => {
     if (!cart.includes(bookId)) {
       setCart([...cart, bookId])
+      setTimeout(() => {
+        setCart(cart.filter(id => id !== bookId))
+      }, 2000)
     }
+  }
+
+  const toggleWishlist = (bookId) => {
+    if (wishlist.includes(bookId)) {
+      setWishlist(wishlist.filter(id => id !== bookId))
+    } else {
+      setWishlist([...wishlist, bookId])
+    }
+  }
+
+  const getBadgeStyles = (badge) => {
+    const styles = {
+      "Editor's Pick": 'bg-gradient-to-r from-purple-600 to-indigo-600',
+      'Bestseller': 'bg-gradient-to-r from-amber-500 to-orange-500',
+      'Trending': 'bg-gradient-to-r from-pink-500 to-rose-500',
+      'Popular': 'bg-gradient-to-r from-blue-500 to-cyan-500',
+      "Readers' Favorite": 'bg-gradient-to-r from-emerald-500 to-teal-500'
+    }
+    return styles[badge] || 'bg-gradient-to-r from-slate-600 to-slate-700'
   }
 
   const BookCard = ({ book }) => (
@@ -86,13 +110,22 @@ export default function WishlistPage() {
       onMouseEnter={() => setHoveredBook(book.id)}
       onMouseLeave={() => setHoveredBook(null)}
     >
+      {book.badge && (
+        <div className={`absolute top-3 left-3 z-20 ${getBadgeStyles(book.badge)} text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg backdrop-blur-sm`}>
+          {book.badge}
+        </div>
+      )}
+
       <button
-        onClick={() => removeFromWishlist(book.id)}
+        onClick={() => toggleWishlist(book.id)}
         className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white hover:scale-110 transition-all duration-200 group/heart"
-        aria-label="Remove from wishlist"
+        aria-label="Add to wishlist"
       >
         <svg
-          className="w-4 h-4 fill-rose-500 text-rose-500 transition-all duration-200"
+          className={`w-4 h-4 transition-all duration-200 ${wishlist.includes(book.id)
+              ? 'fill-rose-500 text-rose-500 scale-110'
+              : 'fill-none text-slate-400 group-hover/heart:text-rose-500'
+            }`}
           stroke="currentColor"
           strokeWidth="2"
           viewBox="0 0 24 24"
@@ -145,6 +178,9 @@ export default function WishlistPage() {
               <p className="text-slate-600 text-sm font-medium truncate">{book.author}</p>
             </div>
           </div>
+          {book.tagline && (
+            <p className="text-slate-500 text-xs italic line-clamp-2 break-words">{book.tagline}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
@@ -177,6 +213,7 @@ export default function WishlistPage() {
           </span>
         </div>
 
+
         <div className="pt-3 border-t border-slate-100 space-y-2.5 mt-auto">
           <div className="flex items-baseline justify-between">
             <div>
@@ -186,11 +223,10 @@ export default function WishlistPage() {
             </div>
           </div>
           <button 
-            onClick={() => addToCart(book.id)}
-            disabled={cart.includes(book.id)}
-            className="w-full py-2.5 px-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-slate-800 disabled:opacity-50 transition-colors"
+            onClick={() => router.push('/checkout')}
+            className="w-full py-2.5 px-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-slate-800 transition-colors"
           >
-            {cart.includes(book.id) ? 'Added to Cart' : 'Add to Cart'}
+            Buy Now
           </button>
         </div>
       </div>
@@ -199,39 +235,39 @@ export default function WishlistPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/">
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Your Wishlist</h1>
-            <p className="text-slate-600">Keep track of the books you want to read next.</p>
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-16 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
+              Discover Your Next
+              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Great Read
+              </span>
+            </h1>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Curated collection of bestsellers, timeless classics, and hidden gems
+            </p>
           </div>
         </div>
+      </div>
 
-        {wishlist.length > 0 ? (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
+        <section>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-1 h-8 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full"></div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">New Release</h2>
+              </div>
+              <p className="text-slate-600 ml-6">Freshly added titles from top authors</p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
-            {wishlist.map((book) => (
+            {readersFavorites.map((book) => (
               <BookCard key={book.id} book={book} />
             ))}
           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center p-12 text-center border-2 border-dashed border-slate-300 rounded-2xl bg-white">
-            <div className="h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center mb-4">
-              <svg className="h-6 w-6 text-slate-400 fill-rose-400" viewBox="0 0 24 24">
-                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold mb-2">Your wishlist is empty</h2>
-            <p className="text-slate-600 mb-6">Explore our collection and save books you love for later.</p>
-            <Button asChild className="bg-slate-900 hover:bg-slate-800">
-              <Link href="/">Browse Books</Link>
-            </Button>
-          </div>
-        )}
+        </section>
       </div>
     </div>
   )

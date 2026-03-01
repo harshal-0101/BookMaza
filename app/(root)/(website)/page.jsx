@@ -121,7 +121,7 @@ const Home = () => {
       </section>
 
       {/* Newsletter */}
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="container mx-auto px-4 flex flex-col md:flex-row bg-[#f7e8e5] rounded-3xl overflow-hidden shadow-sm">
           <div className="flex-1 relative min-h-[400px]">
             <Image
@@ -148,7 +148,7 @@ const Home = () => {
 
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ CTA */}
       <section className="container mx-auto px-4 py-20 text-center space-y-8">
@@ -168,7 +168,7 @@ const Home = () => {
       </section>
 
       {/* Blog Section */}
-      <section className="bg-accent py-24">
+      {/* <section className="bg-accent py-24">
         <div className="container mx-auto px-4 space-y-16">
           <div className="text-center space-y-4">
             <span className="text-xs uppercase tracking-[0.3em] font-bold text-muted-foreground">
@@ -188,7 +188,7 @@ const Home = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
      
