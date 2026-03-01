@@ -125,7 +125,6 @@ export default function BankDetailPage() {
               onClick={() => setShowForm(!showForm)}
               className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow transition"
             >
-              <Plus size={16} />
               {showForm ? "Close Form" : "Add Bank Detail"}
             </button>
           </div>
